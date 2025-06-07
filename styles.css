@@ -1,0 +1,236 @@
+/* Estilos generales */
+body {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background: linear-gradient(135deg, #ff9ff3, #9b5709); /* Fondo predeterminado (rosa) */
+    font-family: 'Arial', sans-serif;
+    transition: background 0.5s ease; /* Transición suave para el fondo */
+}
+
+/* Simulación de un teléfono moderno */
+.phone {
+    width: 375px;
+    height: 667px;
+    background-color: #000;
+    border-radius: 40px;
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.1);
+    overflow: hidden;
+    position: relative;
+}
+
+/* Pantalla de Spotify */
+.screen {
+    width: 100%;
+    height: 100%;
+    background-color: rgba(18, 18, 18, 0.8); /* Fondo semi-transparente */
+    padding: 20px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+}
+
+/* Cabecera */
+.header {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: #fff;
+    font-size: 14px;
+    padding: 10px 0;
+    background-color: rgba(18, 18, 18, 0.8);
+    backdrop-filter: blur(10px);
+    position: sticky;
+    top: 0;
+    z-index: 10;
+}
+
+.header i {
+    font-size: 18px;
+    cursor: pointer;
+}
+
+/* Portada del álbum */
+.album-cover-container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+    position: relative;
+}
+
+.album-cover {
+    width: 300px;
+    height: 300px;
+    border-radius: 15px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+    z-index: 1;
+    animation: pulse 2s infinite; /* Efecto de pulso */
+}
+
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.05);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+/* Ícono de reproducción */
+.play-icon {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 50px;
+    color: rgba(255, 255, 255, 0.8);
+    animation: spin 4s linear infinite; /* Animación de giro */
+    display: none; /* Oculto por defecto */
+}
+
+@keyframes spin {
+    0% {
+        transform: translate(-50%, -50%) rotate(0deg);
+    }
+    100% {
+        transform: translate(-50%, -50%) rotate(360deg);
+    }
+}
+
+/* Información de la canción */
+.song-info {
+    text-align: center;
+    color: #fff;
+    margin-top: 20px;
+}
+
+.song-title {
+    font-size: 24px;
+    margin: 0;
+    font-weight: bold;
+    white-space: nowrap; /* Evita que el texto se divida en varias líneas */
+    overflow: hidden; /* Oculta el texto que se desborda */
+    position: relative;
+    animation: moveTitle 10s linear infinite; /* Animación infinita */
+}
+
+@keyframes moveTitle {
+    0% {
+        transform: translateX(100%);
+    }
+    100% {
+        transform: translateX(-100%);
+    }
+}
+
+.artist-name {
+    font-size: 16px;
+    color: #b3b3b3;
+    margin: 5px 0;
+}
+
+/* Barra de progreso */
+.progress-container {
+    width: 100%;
+    margin-top: 20px;
+    position: relative;
+}
+
+.progress-bar {
+    width: 100%;
+    height: 4px;
+    background-color: #535353;
+    border-radius: 2px;
+    position: relative;
+    cursor: pointer;
+}
+
+.progress {
+    width: 0%; /* Inicia en 0% */
+    height: 100%;
+    background-color: #1db954;
+    border-radius: 2px;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.progress-thumb {
+    width: 12px;
+    height: 12px;
+    background-color: #1db954;
+    border-radius: 50%;
+    position: absolute;
+    top: 50%;
+    left: 0%;
+    transform: translate(-50%, -50%);
+    cursor: pointer;
+    transition: transform 0.2s ease; /* Suaviza el movimiento */
+}
+
+.progress-thumb:active {
+    transform: translate(-50%, -50%) scale(1.2); /* Efecto al hacer clic */
+}
+
+.progress-time {
+    display: flex;
+    justify-content: space-between;
+    color: #b3b3b3;
+    font-size: 12px;
+    margin-top: 5px;
+}
+
+/* Controles de reproducción */
+.controls {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    max-width: 300px;
+    margin-top: 30px;
+}
+
+.control-btn {
+    background: none;
+    border: none;
+    color: #fff;
+    font-size: 24px;
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+.control-btn.play-pause {
+    font-size: 36px;
+}
+
+.control-btn:hover {
+    color: #1db954;
+}
+
+/* Barra inferior */
+.footer {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: #b3b3b3;
+    font-size: 18px;
+    margin-top: 30px;
+    padding: 0 20px;
+    box-sizing: border-box;
+    background-color: rgba(18, 18, 18, 0.8);
+    backdrop-filter: blur(10px);
+    position: sticky;
+    bottom: 0;
+    z-index: 10;
+}
