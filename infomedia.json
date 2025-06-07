@@ -1,0 +1,47 @@
+{
+  "photos": [
+    {
+      "file": "foto1.jpg",
+      "title": "El mejor momento",
+      "emoji": "💕"
+    },
+    {
+      "file": "imagen2.jpg",
+      "description": "Esa tarde perfecta",
+      "emoji": "😍"
+    },
+    {
+      "file": "recuerdo1.jpg",
+      "title": "juntos",
+      "description": "Viendo el cielo",
+      "emoji": "🌅"
+    }
+    
+  ],
+  "videos": [
+    {
+      "file": "video1.mp4",
+      "title": "Nuestro primer baile",
+      "description": "Bailando en la cocina mientras cocinábamos",
+      "date": "10 de mayo, 2023",
+      "location": "Casa",
+      "emoji": "💃"
+    },
+    {
+      "file": "momento1.webm",
+      "title": "Cantando juntos",
+      "description": "Karaoke en casa, desafinando pero felices",
+      "date": "15 de junio, 2023",
+      "location": "Sala de estar",
+      "emoji": "🎤"
+    },
+    {
+      "file": "declaracion.mp4",
+      "title": "Palabras del corazón",
+      "description": "Ese momento especial que siempre recordaremos",
+      "date": "1 de julio, 2023",
+      "location": "Playa del Sol",
+      "emoji": "💖"
+    }
+  ]
+}
