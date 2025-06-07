@@ -6,9 +6,10 @@ body {
     justify-content: center;
     align-items: center;
     height: 100vh;
-    background: linear-gradient(135deg, #ff9ff3, #9b5709); /* Fondo predeterminado (rosa) */
+    background: linear-gradient(135deg, #ff9ff3, #9b5709);
     font-family: 'Arial', sans-serif;
-    transition: background 0.5s ease; /* Transición suave para el fondo */
+    transition: background 0.5s ease;
+    overflow: hidden; /* Para evitar scroll con las animaciones */
 }
 
 /* Simulación de un teléfono moderno */
@@ -20,19 +21,21 @@ body {
     box-shadow: 0 0 20px rgba(255, 255, 255, 0.1);
     overflow: hidden;
     position: relative;
+    z-index: 2;
 }
 
 /* Pantalla de Spotify */
 .screen {
     width: 100%;
     height: 100%;
-    background-color: rgba(18, 18, 18, 0.8); /* Fondo semi-transparente */
+    background-color: rgba(18, 18, 18, 0.8);
     padding: 20px;
     box-sizing: border-box;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: space-between;
+    position: relative;
 }
 
 /* Cabecera */
@@ -56,6 +59,200 @@ body {
     cursor: pointer;
 }
 
+/* BOTÓN DE CORAZÓN ANIMADO - SIGUIENDO ESTÉTICA ORIGINAL */
+.heart-button {
+    position: absolute;
+    top: 80px;
+    right: 30px;
+    width: 50px;
+    height: 50px;
+    background: none;
+    border: none;
+    border-radius: 50%;
+    font-size: 24px;
+    color: #fff;
+    cursor: pointer;
+    z-index: 20;
+    animation: pulse-heart 2s ease-in-out infinite;
+    transition: color 0.3s ease;
+}
+
+.heart-button:hover {
+    color: #f01e53;
+}
+
+.heart-button:active {
+    transform: scale(0.95);
+}
+
+@keyframes pulse-heart {
+    0%, 100% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.3);
+    }
+}
+
+/* GALERÍA - PÁGINA COMPLETA */
+.gallery-page {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, rgba(18, 18, 18, 0.95), rgba(40, 20, 60, 0.95));
+    backdrop-filter: blur(10px);
+    padding: 20px;
+    box-sizing: border-box;
+    opacity: 0;
+    pointer-events: none;
+    transition: all 0.6s ease;
+    z-index: 100;
+    overflow-y: auto;
+}
+
+.gallery-page.show {
+    opacity: 1;
+    pointer-events: all;
+}
+
+/* Header de la galería */
+.gallery-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid rgba(255, 105, 180, 0.3);
+}
+
+.back-btn {
+    background: none;
+    border: none;
+    color: #fff;
+    padding: 10px 15px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: color 0.3s ease;
+}
+
+.back-btn:hover {
+    color: #f01e53;
+}
+
+.gallery-header h2 {
+    color: #fff;
+    font-size: 18px;
+    margin: 0;
+    text-align: center;
+    flex-grow: 1;
+}
+
+/* Navegación de categorías */
+.gallery-nav {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.nav-btn {
+    background: none;
+    border: none;
+    color: #b3b3b3;
+    padding: 8px 16px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 12px;
+    transition: color 0.3s ease;
+}
+
+.nav-btn.active,
+.nav-btn:hover {
+    color: #f01e53;
+}
+
+/* Secciones de media */
+.media-section {
+    display: none;
+}
+
+.media-section.active {
+    display: block;
+}
+
+/* Grid de la galería */
+.gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+    padding-bottom: 20px;
+}
+
+/* Items de la galería */
+.gallery-item {
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 15px;
+    overflow: hidden;
+    transition: all 0.3s ease;
+    border: 1px solid rgba(255, 105, 180, 0.2);
+    backdrop-filter: blur(5px);
+    position: relative;
+}
+
+.gallery-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(255, 105, 180, 0.3);
+    border-color: rgba(255, 105, 180, 0.5);
+}
+
+.gallery-item img,
+.gallery-item video {
+    width: 100%;
+    height: 120px;
+    object-fit: cover;
+    border-radius: 10px 10px 0 0;
+    filter: brightness(0.95) saturate(1.1);
+    transition: filter 0.3s ease;
+}
+
+.gallery-item:hover img,
+.gallery-item:hover video {
+    filter: brightness(1.05) saturate(1.2);
+}
+
+.memory-caption {
+    color: #fff;
+    font-size: 11px;
+    padding: 10px;
+    margin: 0;
+    text-align: center;
+    background: linear-gradient(180deg, transparent, rgba(255, 105, 180, 0.1));
+}
+
+/* Video items específicos */
+.video-item {
+    position: relative;
+}
+
+.video-item::before {
+    content: '🎥';
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    background: rgba(0, 0, 0, 0.7);
+    border-radius: 50%;
+    width: 25px;
+    height: 25px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10;
+    font-size: 12px;
+}
+
 /* Portada del álbum */
 .album-cover-container {
     width: 100%;
@@ -71,7 +268,7 @@ body {
     border-radius: 15px;
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
     z-index: 1;
-    animation: pulse 2s infinite; /* Efecto de pulso */
+    animation: pulse 2s infinite;
 }
 
 @keyframes pulse {
@@ -94,8 +291,8 @@ body {
     transform: translate(-50%, -50%);
     font-size: 50px;
     color: rgba(255, 255, 255, 0.8);
-    animation: spin 4s linear infinite; /* Animación de giro */
-    display: none; /* Oculto por defecto */
+    animation: spin 4s linear infinite;
+    display: none;
 }
 
 @keyframes spin {
@@ -118,10 +315,10 @@ body {
     font-size: 24px;
     margin: 0;
     font-weight: bold;
-    white-space: nowrap; /* Evita que el texto se divida en varias líneas */
-    overflow: hidden; /* Oculta el texto que se desborda */
+    white-space: nowrap;
+    overflow: hidden;
     position: relative;
-    animation: moveTitle 10s linear infinite; /* Animación infinita */
+    animation: moveTitle 10s linear infinite;
 }
 
 @keyframes moveTitle {
@@ -156,7 +353,7 @@ body {
 }
 
 .progress {
-    width: 0%; /* Inicia en 0% */
+    width: 0%;
     height: 100%;
     background-color: #1db954;
     border-radius: 2px;
@@ -175,11 +372,11 @@ body {
     left: 0%;
     transform: translate(-50%, -50%);
     cursor: pointer;
-    transition: transform 0.2s ease; /* Suaviza el movimiento */
+    transition: transform 0.2s ease;
 }
 
 .progress-thumb:active {
-    transform: translate(-50%, -50%) scale(1.2); /* Efecto al hacer clic */
+    transform: translate(-50%, -50%) scale(1.2);
 }
 
 .progress-time {
@@ -233,4 +430,236 @@ body {
     position: sticky;
     bottom: 0;
     z-index: 10;
+}
+
+.footer i {
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+.footer i:hover {
+    color: #1db954;
+}
+
+/* NUEVAS ANIMACIONES ROMÁNTICAS */
+
+/* Corazones latiendo */
+.heart {
+    position: absolute;
+    color: rgba(255, 182, 193, 0.7);
+    font-size: 20px;
+    animation: heartbeat 2s ease-in-out infinite;
+    z-index: 1;
+}
+
+.heart:nth-child(1) {
+    top: 15%;
+    left: 85%;
+    animation-delay: 0s;
+    font-size: 16px;
+}
+
+.heart:nth-child(2) {
+    top: 25%;
+    right: 90%;
+    animation-delay: 0.5s;
+    font-size: 14px;
+}
+
+.heart:nth-child(3) {
+    top: 45%;
+    left: 90%;
+    animation-delay: 1s;
+    font-size: 18px;
+}
+
+.heart:nth-child(4) {
+    top: 65%;
+    right: 85%;
+    animation-delay: 1.5s;
+    font-size: 12px;
+}
+
+.heart:nth-child(5) {
+    top: 80%;
+    left: 88%;
+    animation-delay: 0.8s;
+    font-size: 15px;
+}
+
+@keyframes heartbeat {
+    0%, 100% {
+        transform: scale(1);
+        opacity: 0.7;
+    }
+    50% {
+        transform: scale(1.3);
+        opacity: 1;
+    }
+}
+
+/* Burbujitas flotando */
+.bubble {
+    position: absolute;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.3), rgba(255, 182, 193, 0.2));
+    border-radius: 50%;
+    animation: float-up 6s ease-in-out infinite;
+    z-index: 1;
+}
+
+.bubble:nth-child(1) {
+    width: 8px;
+    height: 8px;
+    left: 10%;
+    bottom: -20px;
+    animation-delay: 0s;
+    animation-duration: 7s;
+}
+
+.bubble:nth-child(2) {
+    width: 12px;
+    height: 12px;
+    left: 25%;
+    bottom: -20px;
+    animation-delay: 1s;
+    animation-duration: 6s;
+}
+
+.bubble:nth-child(3) {
+    width: 6px;
+    height: 6px;
+    left: 45%;
+    bottom: -20px;
+    animation-delay: 2s;
+    animation-duration: 8s;
+}
+
+.bubble:nth-child(4) {
+    width: 10px;
+    height: 10px;
+    left: 65%;
+    bottom: -20px;
+    animation-delay: 0.5s;
+    animation-duration: 7.5s;
+}
+
+.bubble:nth-child(5) {
+    width: 14px;
+    height: 14px;
+    left: 80%;
+    bottom: -20px;
+    animation-delay: 1.5s;
+    animation-duration: 6.5s;
+}
+
+.bubble:nth-child(6) {
+    width: 7px;
+    height: 7px;
+    left: 15%;
+    bottom: -20px;
+    animation-delay: 3s;
+    animation-duration: 8.5s;
+}
+
+@keyframes float-up {
+    0% {
+        transform: translateY(0) rotate(0deg);
+        opacity: 0;
+    }
+    10% {
+        opacity: 0.8;
+    }
+    90% {
+        opacity: 0.8;
+    }
+    100% {
+        transform: translateY(-700px) rotate(360deg);
+        opacity: 0;
+    }
+}
+
+/* Partículas de luz románticas */
+.sparkle {
+    position: absolute;
+    width: 3px;
+    height: 3px;
+    background: radial-gradient(circle, #fff, rgba(255, 182, 193, 0.8));
+    border-radius: 50%;
+    animation: sparkle 3s ease-in-out infinite;
+    z-index: 1;
+}
+
+.sparkle:nth-child(1) {
+    top: 20%;
+    left: 15%;
+    animation-delay: 0s;
+}
+
+.sparkle:nth-child(2) {
+    top: 35%;
+    right: 20%;
+    animation-delay: 1s;
+}
+
+.sparkle:nth-child(3) {
+    top: 60%;
+    left: 10%;
+    animation-delay: 2s;
+}
+
+.sparkle:nth-child(4) {
+    top: 75%;
+    right: 15%;
+    animation-delay: 0.5s;
+}
+
+@keyframes sparkle {
+    0%, 100% {
+        opacity: 0;
+        transform: scale(0);
+    }
+    50% {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* Efecto de respiración suave en el album cover cuando se reproduce */
+.album-cover.playing {
+    animation: gentle-breath 4s ease-in-out infinite;
+    box-shadow: 0 0 30px rgba(255, 182, 193, 0.3);
+}
+
+@keyframes gentle-breath {
+    0%, 100% {
+        transform: scale(1);
+        box-shadow: 0 0 30px rgba(255, 182, 193, 0.3);
+    }
+    50% {
+        transform: scale(1.02);
+        box-shadow: 0 0 40px rgba(255, 182, 193, 0.5);
+    }
+}
+
+/* Animación sutil para el fondo */
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle at 20% 80%, rgba(255, 182, 193, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(255, 105, 180, 0.1) 0%, transparent 50%);
+    animation: background-move 20s ease-in-out infinite alternate;
+    z-index: 0;
+}
+
+@keyframes background-move {
+    0% {
+        transform: translate(0, 0) scale(1);
+    }
+    100% {
+        transform: translate(-10px, -5px) scale(1.02);
+    }
 }
