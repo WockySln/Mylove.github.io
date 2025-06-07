@@ -1,0 +1,84 @@
+{
+  "songs": [
+    {
+      "id": "beso",
+      "title": "Beso",
+      "artist": "Josean Log",
+      "audioFile": "Beso.mp3",
+      "coverImage": "Beso.jpg",
+      "colors": ["#ff6b6b", "#4ecdc4"]
+    },
+    {
+      "id": "cupids-chokehold",
+      "title": "Cupid's Chokehold",
+      "artist": "Gym Class Heroes",
+      "audioFile": "Cupid_sChokehold.mp3",
+      "coverImage": "Cupid_sChokehold.jpg",
+      "colors": ["#667eea", "#764ba2"]
+    },
+    {
+      "id": "dark-red",
+      "title": "Dark Red",
+      "artist": "Steve Lacy",
+      "audioFile": "Dark_red.mp3",
+      "coverImage": "Dark_red.jpg",
+      "colors": ["#8b0000", "#ff6b6b"]
+    },
+    {
+      "id": "die-for-you",
+      "title": "Die For You",
+      "artist": "The Weeknd",
+      "audioFile": "Die_for_you.mp3",
+      "coverImage": "Die_for_you.jpg",
+      "colors": ["#2c1810", "#8b4513"]
+    },
+    {
+      "id": "dream-girl",
+      "title": "Dream Girl",
+      "artist": "Ir Sais",
+      "audioFile": "Dream_Girl.mp3",
+      "coverImage": "Dream_Girl.jpg",
+      "colors": ["#ff69b4", "#dda0dd"]
+    },
+    {
+      "id": "i-wanna-be-yours",
+      "title": "I Wanna Be Yours",
+      "artist": "Arctic Monkeys",
+      "audioFile": "I_wanna_be_yours.mp3",
+      "coverImage": "I_wanna_be_yours.jpg",
+      "colors": ["#4b0082", "#9932cc"]
+    },
+    {
+      "id": "just-the-way-you-are",
+      "title": "Just The Way You Are",
+      "artist": "Bruno Mars",
+      "audioFile": "Just_the_way_you_are.mp3",
+      "coverImage": "Just_the_way_you_are.jpg",
+      "colors": ["#ffd700", "#ff8c00"]
+    },
+    {
+      "id": "locos",
+      "title": "Locos",
+      "artist": "León Larregui",
+      "audioFile": "Locos.mp3",
+      "coverImage": "Locos.jpg",
+      "colors": ["#32cd32", "#228b22"]
+    },
+    {
+      "id": "magic-music-box",
+      "title": "Magic Music Box",
+      "artist": "León Larregui",
+      "audioFile": "magic_music_box.mp3",
+      "coverImage": "magic_music_box.jpg",
+      "colors": ["#9370db", "#dda0dd"]
+    },
+    {
+      "id": "melting",
+      "title": "Melting",
+      "artist": "cuco",
+      "audioFile": "Melting.mp3",
+      "coverImage": "melting.jpg",
+      "colors": ["#ff1493", "#ff69b4"]
+    }
+  ]
+}
