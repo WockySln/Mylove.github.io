@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jenny 💕</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>💕</text></svg>">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <div class="phone">
+        <div class="screen">
+            <!-- Corazones animados -->
+            <div class="heart">💖</div>
+            <div class="heart">💗</div>
+            <div class="heart">💕</div>
+            <div class="heart">💖</div>
+            <div class="heart">💗</div>
+
+            <!-- Burbujas flotando -->
+            <div class="bubble"></div>
+            <div class="bubble"></div>
+            <div class="bubble"></div>
+            <div class="bubble"></div>
+            <div class="bubble"></div>
+            <div class="bubble"></div>
+
+            <!-- Partículas brillantes -->
+            <div class="sparkle"></div>
+            <div class="sparkle"></div>
+            <div class="sparkle"></div>
+            <div class="sparkle"></div>
+
+            <!-- Cabecera -->
+            <div class="header">
+                <i class="fas fa-chevron-down"></i>
+                <span>Canciones que me recuerdan a ti 💕</span>
+                <i class="fas fa-ellipsis-v"></i>
+            </div>
+
+            <!-- Botón de corazón animado (nueva funcionalidad) -->
+            <button class="heart-button" onclick="openGallery()">
+                💖
+            </button>
+
+            <!-- Portada del álbum -->
+            <div class="album-cover-container">
+                <img id="album-cover" src="https://via.placeholder.com/500x500/667eea/ffffff?text=Cargando..." alt="Album Cover" class="album-cover">
+                <div class="play-icon"><i class="fas fa-play"></i></div>
+            </div>
+
+            <!-- Información de la canción -->
+            <div class="song-info">
+                <h2 id="song-title" class="song-title">Cargando canciones...</h2>
+                <p id="artist-name" class="artist-name">Escaneando carpeta Music</p>
+            </div>
+
+            <!-- Barra de progreso -->
+            <div class="progress-container">
+                <div class="progress-bar">
+                    <div class="progress"></div>
+                    <div class="progress-thumb"></div>
+                </div>
+                <div class="progress-time">
+                    <span id="current-time">0:00</span>
+                    <span id="total-time">0:00</span>
+                </div>
+            </div>
+
+            <!-- Controles de reproducción -->
+            <div class="controls">
+                <button class="control-btn shuffle" title="Mezclar"><i class="fas fa-random"></i></button>
+                <button class="control-btn prev" title="Anterior"><i class="fas fa-backward"></i></button>
+                <button class="control-btn play-pause" title="Reproducir/Pausar"><i class="fas fa-play"></i></button>
+                <button class="control-btn next" title="Siguiente"><i class="fas fa-forward"></i></button>
+                <button class="control-btn repeat" title="Repetir"><i class="fas fa-redo"></i></button>
+            </div>
+
+            <!-- Barra inferior -->
+            <div class="footer">
+                <i class="fas fa-tv" title="Dispositivos disponibles" style="cursor: pointer;"></i>
+                <i class="fas fa-list-ul" title="Ver playlist" style="cursor: pointer;"></i>
+                <i class="fas fa-volume-up" title="Silenciar/Activar sonido" style="cursor: pointer;"></i>
+            </div>
+
+            <!-- Galería oculta que aparece con el botón corazón -->
+            <div id="memoryGallery" class="gallery-page">
+                <div class="gallery-header">
+                    <button class="back-btn" onclick="closeGallery()">← Volver</button>
+                    <h2>Nuestros Momentos 💕</h2>
+                </div>
+                
+                <!-- Navegación de categorías -->
+                <div class="gallery-nav">
+                    <button class="nav-btn active" onclick="showCategory('photos')">📸 Fotos</button>
+                    <button class="nav-btn" onclick="showCategory('videos')">🎥 Videos</button>
+                </div>
+                
+                <!-- Sección de Fotos -->
+                <div id="photos-section" class="media-section active">
+                    <div class="gallery-grid" id="photos-grid">
+                        <!-- Las fotos se cargarán dinámicamente desde info.json -->
+                    </div>
+                </div>
+                
+                <!-- Sección de Videos -->
+                <div id="videos-section" class="media-section">
+                    <div class="gallery-grid" id="videos-grid">
+                        <!-- Los videos se cargarán dinámicamente desde info.json -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- Indicador de estado de carga -->
+            <div id="loading-indicator" style="display: none; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); color: white; text-align: center; z-index: 1000;">
+                <i class="fas fa-spinner fa-spin" style="font-size: 24px; margin-bottom: 10px;"></i>
+                <p>Cargando música...</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Cargar contenido dinámicamente desde infomedia.json
+        async function loadGalleryContent() {
+            try {
+                const response = await fetch('./infomedia.json');
+                const data = await response.json();
+                
+                // Cargar fotos
+                const photosGrid = document.getElementById('photos-grid');
+                data.photos.forEach(photo => {
+                    const photoItem = document.createElement('div');
+                    photoItem.className = 'gallery-item';
+                    photoItem.innerHTML = `
+                        <img src="./${photo.file}" alt="${photo.title}" loading="lazy">
+                        <p class="memory-caption">${photo.title} ${photo.emoji}</p>
+                    `;
+                    photosGrid.appendChild(photoItem);
+                });
+                
+                // Cargar videos
+                const videosGrid = document.getElementById('videos-grid');
+                data.videos.forEach(video => {
+                    const videoItem = document.createElement('div');
+                    videoItem.className = 'gallery-item video-item';
+                    videoItem.innerHTML = `
+                        <video controls ${video.poster ? `poster="./${video.poster}"` : ''}>
+                            <source src="./${video.file}" type="video/mp4">
+                            Tu navegador no soporta videos.
+                        </video>
+                        <p class="memory-caption">${video.title} ${video.emoji}</p>
+                    `;
+                    videosGrid.appendChild(videoItem);
+                });
+                
+            } catch (error) {
+                console.error('Error cargando contenido:', error);
+                // Mostrar mensaje de fallback
+                document.getElementById('photos-grid').innerHTML = '<p>No se pudieron cargar las fotos 📸</p>';
+                document.getElementById('videos-grid').innerHTML = '<p>No se pudieron cargar los videos 🎥</p>';
+            }
+        }
+        
+        // Función para abrir la galería (página completa)
+        function openGallery() {
+            const gallery = document.getElementById("memoryGallery");
+            gallery.classList.add("show");
+        }
+        
+        // Función para cerrar la galería
+        function closeGallery() {
+            const gallery = document.getElementById("memoryGallery");
+            gallery.classList.remove("show");
+        }
+        
+        // Función para cambiar entre fotos y videos
+        function showCategory(category) {
+            // Ocultar todas las secciones
+            document.getElementById("photos-section").classList.remove("active");
+            document.getElementById("videos-section").classList.remove("active");
+            
+            // Remover clase active de todos los botones
+            const navBtns = document.querySelectorAll(".nav-btn");
+            navBtns.forEach(btn => btn.classList.remove("active"));
+            
+            // Mostrar la sección seleccionada
+            if (category === 'photos') {
+                document.getElementById("photos-section").classList.add("active");
+                document.querySelector('[onclick="showCategory(\'photos\')"]').classList.add("active");
+            } else if (category === 'videos') {
+                document.getElementById("videos-section").classList.add("active");
+                document.querySelector('[onclick="showCategory(\'videos\')"]').classList.add("active");
+            }
+        }
+        
+        // Cargar contenido al iniciar la página
+        document.addEventListener('DOMContentLoaded', loadGalleryContent);
+    </script>
+    <script src="script.js"></script>
+</body>
+</html>
