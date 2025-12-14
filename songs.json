@@ -79,6 +79,14 @@
       "audioFile": "Melting.mp3",
       "coverImage": "melting.jpg",
       "colors": ["#ff1493", "#ff69b4"]
+    },
+    {
+      "id": "Sweater-Weather",
+      "title": "Sweater Weather",
+      "artist": "The Neighbourhood",
+      "audioFile": "Sweater_Weather.mp3",
+      "coverImage": "sweater-weather.jpeg",
+      "colors": ["#1e90ff", "#4682b4"]
     }
   ]
 }
